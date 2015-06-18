@@ -1,8 +1,12 @@
+/**
+ * @file Neighbor.hpp
+ * @author Takashi Michikawa <michikawa@acm.org>
+ */
 #ifndef MI_NEIGHBOR_HPP
 #define MI_NEIGHBOR_HPP 1
+
 #include <vector>
 #include <mi/math.hpp>
-
 namespace mi
 {
         /**

@@ -1,3 +1,8 @@
+/**
+ * @file Range.hpp
+ * @author Takashi Michikawa <michikawa@acm.org>
+ *
+ */
 #ifndef MI_RANGE_HPP
 #define MI_RANGE_HPP 1
 #include "math.hpp"

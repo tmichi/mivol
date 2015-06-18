@@ -19,6 +19,7 @@ namespace mi
         public:
                 explicit VolumeDataImporter ( VolumeData<T>& data, const size_t header_size = 0 );
 		~VolumeDataImporter( void ) ;
+		
         protected:
 		bool readHeader ( std::ifstream& fin );
                 bool readBody ( std::ifstream& fin );
