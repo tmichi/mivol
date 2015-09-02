@@ -16,7 +16,7 @@ ENABLE_TESTING()
 
 find_package( PkgConfig )
 pkg_check_modules( EIGEN3 REQUIRED eigen3 )
-include_directories( ${EIGEN3_INCLUDE_DIRS} /usr/local/include ./include)
+include_directories( ${EIGEN3_INCLUDE_DIRS} ./include /usr/local/include)
 LINK_DIRECTORIES(/usr/local/lib)		      
 IF(APPLE)
     SET(CMAKE_MACOSX_RPATH 1)
@@ -26,6 +26,6 @@ ENDIF(APPLE)
 ADD_SUBDIRECTORY(include)
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(samples)
-
+ADD_SUBDIRECTORY(tests)
 
 

@@ -50,7 +50,8 @@ namespace mi
                 VolumeInfo& setPitch ( const Point3d& pitch );
                 VolumeInfo& setOrigin( const Point3d& origin );
                 VolumeInfo& init     ( const Point3i& size, const Point3d& pitch,  const Point3d& origin );
-		
+                VolumeInfo& initByBoundingBox ( const Vector3d& bmin, const Vector3d& bmax,  const Point3d& pitch, const double offset = 1.0e-6 );
+
                 Point3i getMin    ( void ) const;
                 Point3i getMax    ( void ) const;
                 Point3i getSize   ( void ) const;
