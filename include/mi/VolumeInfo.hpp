@@ -50,6 +50,14 @@ namespace mi
                 VolumeInfo& setPitch ( const Point3d& pitch );
                 VolumeInfo& setOrigin( const Point3d& origin );
                 VolumeInfo& init     ( const Point3i& size, const Point3d& pitch,  const Point3d& origin );
+		/**
+		 * @brief Initialize by bounding box.
+		 * @param [in] bmin Bounding box ( minimum )
+		 * @param [in] bmax Bounding box ( maximum )
+		 * @param [in] pitch Voxel pitch 
+		 * @param [in] offset Offset value.
+		 * @return Reference to itself. 
+		 */
                 VolumeInfo& initByBoundingBox ( const Vector3d& bmin, const Vector3d& bmax,  const Point3d& pitch, const double offset = 1.0e-6 );
 
                 Point3i getMin    ( void ) const;
@@ -57,11 +65,11 @@ namespace mi
                 Point3i getSize   ( void ) const;
                 Point3d getPitch  ( void ) const;
                 Point3d getOrigin ( void ) const;
-
+		
                 Point3d  getPointInSpace  ( const Point3i& p  ) const;
                 Point3i  getPointInVoxel  ( const Point3d& p  ) const;
                 Vector3d getVectorInSpace ( const Vector3s& p ) const;
-
+		
                 bool isValid  ( const Point3i& p ) const;
                 bool isCorner ( const Point3i& p ) const;
                 Point3i clamp ( const Point3i& p ) const;
