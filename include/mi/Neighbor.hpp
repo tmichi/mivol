@@ -6,7 +6,7 @@
 #define MI_NEIGHBOR_HPP 1
 
 #include <vector>
-#include <mi/math.hpp>
+#include "volmath.hpp"
 namespace mi
 {
         /**

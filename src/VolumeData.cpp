@@ -277,6 +277,8 @@ namespace mi
         VOLUME_DATA( int );
         VOLUME_DATA( float );
         VOLUME_DATA( double );
+        VOLUME_DATA( mi::Vector3s );
+
 
 
 }

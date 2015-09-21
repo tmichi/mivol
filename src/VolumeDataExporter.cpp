@@ -82,8 +82,6 @@ namespace mi
         VOLUME_DATA_EXPORTER( int );
         VOLUME_DATA_EXPORTER( float );
         VOLUME_DATA_EXPORTER( double );
-
-
 }
 
 

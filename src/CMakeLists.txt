@@ -1,4 +1,4 @@
-ADD_LIBRARY( mivol SHARED
+ADD_LIBRARY( mivol STATIC
 Range.cpp
 RangeIterator.cpp
 VolumeInfo.cpp
@@ -8,6 +8,4 @@ VolumeDataImporter.cpp
 VolumeDataExporter.cpp
 Neighbor.cpp
 )
-TARGET_LINK_LIBRARIES(mivol mibase)
-SET_TARGET_PROPERTIES(mivol PROPERTIES VERSION ${serial} SOVERSION ${soserial})
-INSTALL(TARGETS mivol LIBRARY DESTINATION lib)
+INSTALL(TARGETS mivol ARCHIVE DESTINATION lib)

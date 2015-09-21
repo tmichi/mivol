@@ -1,4 +1,4 @@
-SET ( include_files VolumeInfo.hpp VolumeData.hpp VolumeDataImporter.hpp VolumeDataExporter.hpp Neighbor.hpp Range.hpp math.hpp
+SET ( include_files VolumeInfo.hpp VolumeData.hpp VolumeDataImporter.hpp VolumeDataExporter.hpp Neighbor.hpp Range.hpp volmath.hpp
     )
 INSTALL ( FILES ${include_files}
           DESTINATION include/mi
