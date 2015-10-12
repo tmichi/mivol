@@ -42,10 +42,12 @@ namespace mi
 		class Impl;
 		Impl *_impl;
         public:
-                explicit VolumeInfo ( const Point3i& size = Point3i( 0,0,0 ), const Point3d& pitch = Point3d( 1,1,1 ), const Point3d& origin = Point3d( 0,0,0 ) );
+                explicit VolumeInfo ( const Point3i& size   = Point3i( 0,0,0 ), 
+				      const Point3d& pitch  = Point3d( 1,1,1 ), 
+				      const Point3d& origin = Point3d( 0,0,0 ) );
                 explicit VolumeInfo ( const VolumeInfo& that );
 		~VolumeInfo( void ) ;
-		
+
                 VolumeInfo& setSize  ( const Point3i& size );
                 VolumeInfo& setPitch ( const Point3d& pitch );
                 VolumeInfo& setOrigin( const Point3d& origin );

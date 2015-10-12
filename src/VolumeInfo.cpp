@@ -75,7 +75,7 @@ namespace mi
                 this->setSize( size ).setPitch( pitch ).setOrigin( origin );
                 return;
         }
-
+	
         VolumeInfo::~VolumeInfo ( void )
         {
 		if ( this->_impl != NULL ) {
@@ -275,4 +275,15 @@ namespace mi
                 if ( upper < result  ) result = upper;
                 return result;
         }
+/*
+  VolumeInfo
+	VolumeInfo::initByBoundingBox ( const Vector3d& bmin, const Vector3d& bmax,  const Point3d& pitch, const double offset) {
+		mi::Point3d origin = bmin - mi::Vector3d(offset, offset, offset); 
+		mi::Point3i size;
+		size.x() = static_cast<int>( std::ceil ( ( bmax.x() - bmin.x() + 2 * offset ) / pitch.x()) );
+		size.y() = static_cast<int>( std::ceil ( ( bmax.y() - bmin.y() + 2 * offset ) / pitch.y()) );
+		size.z() = static_cast<int>( std::ceil ( ( bmax.z() - bmin.z() + 2 * offset ) / pitch.z()) );
+		return VolumeInfo(size, pitch, origin);
+	}
+*/
 };
