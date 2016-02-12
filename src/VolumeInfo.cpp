@@ -162,6 +162,29 @@ namespace mi
                        );
         }
 
+        Point3i
+        VolumeInfo::getPointInVoxelCeil ( const Point3d& p ) const
+        {
+                const Point3d& pitch  = this->getPitch();
+                const Point3d v = p - this->getOrigin();
+                return Point3i (
+			static_cast<int>( std::ceil( v.x() / pitch.x() ) ),
+			static_cast<int>( std::ceil( v.y() / pitch.y() ) ),
+			static_cast<int>( std::ceil( v.z() / pitch.z() ) )
+			);
+        }
+        Point3i
+        VolumeInfo::getPointInVoxelFloor ( const Point3d& p ) const
+        {
+                const Point3d& pitch  = this->getPitch();
+                const Point3d v = p - this->getOrigin();
+                return Point3i (
+			static_cast<int>( std::floor( v.x() / pitch.x() ) ),
+			static_cast<int>( std::floor( v.y() / pitch.y() ) ),
+			static_cast<int>( std::floor( v.z() / pitch.z() ) )
+                       );
+        }
+
         Vector3d
         VolumeInfo::getVectorInSpace ( const Vector3s& p ) const
         {
@@ -275,6 +298,16 @@ namespace mi
                 if ( upper < result  ) result = upper;
                 return result;
         }
+
+	void 
+	VolumeInfo::clip ( const Point3d& bmin, const Point3d& bmax, VolumeInfo& info) {
+                const Point3d& pitch  = this->getPitch();
+		const Point3i pmin = this->getPointInVoxelFloor( bmin - this->getOrigin());
+		const Point3i pmax = this->getPointInVoxelCeil ( bmax - this->getOrigin());
+		const Point3i size = pmax - pmin + mi::Point3i(1,1,1);
+		
+		info.init ( size, pitch, bmin);
+	}
 /*
   VolumeInfo
 	VolumeInfo::initByBoundingBox ( const Vector3d& bmin, const Vector3d& bmax,  const Point3d& pitch, const double offset) {

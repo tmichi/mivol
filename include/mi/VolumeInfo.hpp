@@ -70,8 +70,10 @@ namespace mi
 		
                 Point3d  getPointInSpace  ( const Point3i& p  ) const;
                 Point3i  getPointInVoxel  ( const Point3d& p  ) const;
+                Point3i  getPointInVoxelCeil  ( const Point3d& p  ) const;
+                Point3i  getPointInVoxelFloor  ( const Point3d& p  ) const;
                 Vector3d getVectorInSpace ( const Vector3s& p ) const;
-		
+
                 bool isValid  ( const Point3i& p ) const;
                 bool isCorner ( const Point3i& p ) const;
                 Point3i clamp ( const Point3i& p ) const;
@@ -87,6 +89,8 @@ namespace mi
 
                 std::string getSizeString( void ) const;
 		std::string getPitchString( void ) const;
+
+		void clip ( const Point3d& bmin, const Point3d& bmax, VolumeInfo& info);
 
 	private:
 		int clamp_int ( const int v, const int minv, const int maxv ) const;
