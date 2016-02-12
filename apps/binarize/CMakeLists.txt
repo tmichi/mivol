@@ -1,0 +1,8 @@
+INCLUDE_DIRECTORIES(../../include)
+ADD_EXECUTABLE(binarize binarize_main.cpp BinarizeCommand.hpp BinarizeCommand.cpp)
+TARGET_LINK_LIBRARIES(binarize mibase mivol)
+INSTALL(TARGETS binarize
+	RUNTIME
+	DESTINATION bin
+	PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
