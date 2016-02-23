@@ -277,6 +277,15 @@ namespace mi
         VOLUME_DATA( int );
         VOLUME_DATA( float );
         VOLUME_DATA( double );
+
+//        VOLUME_DATA( uint8_t );
+//        VOLUME_DATA( int8_t );
+//        VOLUME_DATA( uint16_t );
+//        VOLUME_DATA( int16_t );
+//        VOLUME_DATA( uint32_t );
+//        VOLUME_DATA( int32_t );
+//        VOLUME_DATA( uint64_t );
+//        VOLUME_DATA( int64_t );
         VOLUME_DATA( mi::Vector3s );
 
 
