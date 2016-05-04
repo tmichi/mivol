@@ -18,7 +18,7 @@ namespace mi
                 Impl ( const Impl& );
                 void operator = ( const Impl& );
         public:
-                Impl ( void ) : _size( 0, 0, 0 ), _pitch( 1, 1, 1 ), _origin( 0, 0, 0 )
+                Impl ( void ) : _size ( 0, 0, 0 ), _pitch ( 1, 1, 1 ), _origin ( 0, 0, 0 )
                 {
                         return;
                 }
@@ -51,19 +51,19 @@ namespace mi
                         return this->_origin;
                 }
 
-                void setSize   ( const Point3i &size )
+                void setSize   ( const Point3i& size )
                 {
                         this->_size = size;
                         return;
                 }
 
-                void setPitch  ( const Point3d &pitch )
+                void setPitch  ( const Point3d& pitch )
                 {
                         this->_pitch = pitch;
                         return;
                 }
 
-                void setOrigin ( const Point3d &origin )
+                void setOrigin ( const Point3d& origin )
                 {
                         this->_origin = origin;
                         return;
@@ -72,57 +72,58 @@ namespace mi
 
         VolumeInfo::VolumeInfo ( const Point3i& size , const Point3d& pitch, const Point3d& origin ) : _impl ( new VolumeInfo::Impl() )
         {
-                this->setSize( size ).setPitch( pitch ).setOrigin( origin );
+                this->setSize ( size ).setPitch ( pitch ).setOrigin ( origin );
                 return;
         }
-	
+
         VolumeInfo::~VolumeInfo ( void )
         {
-		if ( this->_impl != NULL ) {
-			delete this->_impl;
-			this->_impl = NULL;
-		}
+                if ( this->_impl != NULL ) {
+                        delete this->_impl;
+                        this->_impl = NULL;
+                }
+
                 return;
         }
 
 
         VolumeInfo::VolumeInfo ( const VolumeInfo& that ) : _impl ( new VolumeInfo::Impl() )
         {
-                this->_impl->copy ( *( that._impl ) );
+                this->_impl->copy ( * ( that._impl ) );
                 return;
         }
 
         VolumeInfo&
-        VolumeInfo::setSize( const Point3i& size )
+        VolumeInfo::setSize ( const Point3i& size )
         {
-                this->_impl->setSize( size );
+                this->_impl->setSize ( size );
                 return *this;
         }
 
         VolumeInfo&
-        VolumeInfo::setPitch( const Point3d& pitch )
+        VolumeInfo::setPitch ( const Point3d& pitch )
         {
-                this->_impl->setPitch( pitch );
+                this->_impl->setPitch ( pitch );
                 return *this;
         }
 
         VolumeInfo&
-        VolumeInfo::setOrigin( const Point3d& origin )
+        VolumeInfo::setOrigin ( const Point3d& origin )
         {
-                this->_impl->setOrigin( origin );
+                this->_impl->setOrigin ( origin );
                 return *this;
         }
 
         Point3i
         VolumeInfo::getMin ( void ) const
         {
-                return Point3i( 0, 0, 0 );
+                return Point3i ( 0, 0, 0 );
         }
 
         Point3i
         VolumeInfo::getMax ( void ) const
         {
-                return this->getSize() - Point3i( 1, 1, 1 );
+                return this->getSize() - Point3i ( 1, 1, 1 );
         }
 
         Point3i
@@ -156,9 +157,9 @@ namespace mi
                 const Point3d& pitch  = this->getPitch();
                 const Point3d v = p - this->getOrigin();
                 return Point3i (
-                               static_cast<int>( v.x() / pitch.x() ),
-                               static_cast<int>( v.y() / pitch.y() ),
-                               static_cast<int>( v.z() / pitch.z() )
+                               static_cast<int> ( v.x() / pitch.x() ),
+                               static_cast<int> ( v.y() / pitch.y() ),
+                               static_cast<int> ( v.z() / pitch.z() )
                        );
         }
 
@@ -168,10 +169,10 @@ namespace mi
                 const Point3d& pitch  = this->getPitch();
                 const Point3d v = p - this->getOrigin();
                 return Point3i (
-			static_cast<int>( std::ceil( v.x() / pitch.x() ) ),
-			static_cast<int>( std::ceil( v.y() / pitch.y() ) ),
-			static_cast<int>( std::ceil( v.z() / pitch.z() ) )
-			);
+                               static_cast<int> ( std::ceil ( v.x() / pitch.x() ) ),
+                               static_cast<int> ( std::ceil ( v.y() / pitch.y() ) ),
+                               static_cast<int> ( std::ceil ( v.z() / pitch.z() ) )
+                       );
         }
         Point3i
         VolumeInfo::getPointInVoxelFloor ( const Point3d& p ) const
@@ -179,9 +180,9 @@ namespace mi
                 const Point3d& pitch  = this->getPitch();
                 const Point3d v = p - this->getOrigin();
                 return Point3i (
-			static_cast<int>( std::floor( v.x() / pitch.x() ) ),
-			static_cast<int>( std::floor( v.y() / pitch.y() ) ),
-			static_cast<int>( std::floor( v.z() / pitch.z() ) )
+                               static_cast<int> ( std::floor ( v.x() / pitch.x() ) ),
+                               static_cast<int> ( std::floor ( v.y() / pitch.y() ) ),
+                               static_cast<int> ( std::floor ( v.z() / pitch.z() ) )
                        );
         }
 
@@ -195,7 +196,10 @@ namespace mi
         int
         VolumeInfo::toIndex ( const  Point3i& p ) const
         {
-                if ( ! this->isValid ( p ) ) return -1;
+                if ( ! this->isValid ( p ) ) {
+                        return -1;
+                }
+
                 const Point3i& size = this->getSize();
                 return p.x() + size.x() * ( p.y() + p.z() * size.y() ) ;
         }
@@ -205,14 +209,14 @@ namespace mi
         {
                 const Point3i& size = this->getSize ();
                 return Point3i (
-                               static_cast<int>(   idx %   size.x() ),
-                               static_cast<int>( ( idx % ( size.x() * size.y() ) ) / size.x() ),
-                               static_cast<int>(   idx / ( size.x() * size.y() ) )
+                               static_cast<int> (   idx %   size.x() ),
+                               static_cast<int> ( ( idx % ( size.x() * size.y() ) ) / size.x() ),
+                               static_cast<int> (   idx / ( size.x() * size.y() ) )
                        );
         }
 
         bool
-        VolumeInfo::isValid ( const Point3i & p ) const
+        VolumeInfo::isValid ( const Point3i& p ) const
         {
                 const Point3i& bmin = this->getMin ();
                 const Point3i& bmax = this->getMax ();
@@ -226,67 +230,88 @@ namespace mi
         {
                 const Point3i& bmin = this->getMin ();
                 const Point3i& bmax = this->getMax ();
-                const int x = this->clamp_int( p.x(), bmin.x(), bmax.x() );
-                const int y = this->clamp_int( p.y(), bmin.y(), bmax.y() );
-                const int z = this->clamp_int( p.z(), bmin.z(), bmax.z() );
+                const int x = this->clamp_int ( p.x(), bmin.x(), bmax.x() );
+                const int y = this->clamp_int ( p.y(), bmin.y(), bmax.y() );
+                const int z = this->clamp_int ( p.z(), bmin.z(), bmax.z() );
                 return Point3i ( x, y, z );
         }
 
         float
-        VolumeInfo::getLength( const mi::Point3i& v ) const
+        VolumeInfo::getLength ( const mi::Point3i& v ) const
         {
-                return static_cast<float>( std::sqrt( this->getLengthSquared( v ) ) );
+                return static_cast<float> ( std::sqrt ( this->getLengthSquared ( v ) ) );
         }
 
         float
-        VolumeInfo::getLengthSquared( const mi::Point3i& v ) const
+        VolumeInfo::getLengthSquared ( const mi::Point3i& v ) const
         {
                 const mi::Point3d& p = this->getPitch();
-                return static_cast<float>( v.x() * v.x() * p.x() * p.x() + v.y() * v.y() * p.y() * p.y() + v.z() * v.z() * p.z() * p.z() );
+                return static_cast<float> ( v.x() * v.x() * p.x() * p.x() + v.y() * v.y() * p.y() * p.y() + v.z() * v.z() * p.z() * p.z() );
         }
 
         VolumeInfo::iterator
-        VolumeInfo::begin( void )
+        VolumeInfo::begin ( void )
         {
                 return VolumeInfo::iterator ( this, true );
         }
 
         VolumeInfo::iterator
-        VolumeInfo::end( void )
+        VolumeInfo::end ( void )
         {
                 return VolumeInfo::iterator ( this, false );
         }
 
         VolumeInfo&
-        VolumeInfo::init( const Point3i& size, const Point3d& pitch,  const Point3d& origin )
+        VolumeInfo::init ( const Point3i& size, const Point3d& pitch,  const Point3d& origin )
         {
-                return this->setSize( size ).setPitch( pitch ).setOrigin( origin );
+                return this->setSize ( size ).setPitch ( pitch ).setOrigin ( origin );
         }
 
-	VolumeInfo& 
-	VolumeInfo::initByBoundingBox ( const Vector3d& bmin, const Vector3d& bmax,  const Point3d& pitch, const double offset) {
-		mi::Point3d origin = bmin - mi::Vector3d(offset, offset, offset); 
-		mi::Point3i size;
-		size.x() = static_cast<int>( std::ceil ( ( bmax.x() - bmin.x() + 2 * offset ) / pitch.x()) );
-		size.y() = static_cast<int>( std::ceil ( ( bmax.y() - bmin.y() + 2 * offset ) / pitch.y()) );
-		size.z() = static_cast<int>( std::ceil ( ( bmax.z() - bmin.z() + 2 * offset ) / pitch.z()) );
-		return this->init(size, pitch, origin);
-	}
+        VolumeInfo&
+        VolumeInfo::initByBoundingBox ( const Vector3d& bmin, const Vector3d& bmax,  const Point3d& pitch, const double offset )
+        {
+                mi::Point3d origin = bmin - mi::Vector3d ( offset, offset, offset );
+                mi::Point3i size;
+                size.x() = static_cast<int> ( std::ceil ( ( bmax.x() - bmin.x() + 2 * offset ) / pitch.x() ) );
+                size.y() = static_cast<int> ( std::ceil ( ( bmax.y() - bmin.y() + 2 * offset ) / pitch.y() ) );
+                size.z() = static_cast<int> ( std::ceil ( ( bmax.z() - bmin.z() + 2 * offset ) / pitch.z() ) );
+                return this->init ( size, pitch, origin );
+        }
 
         bool
         VolumeInfo::isCorner ( const Point3i& p ) const
         {
-                if (  ! this->isValid( p ) ) return false;
+                if (  ! this->isValid ( p ) ) {
+                        return false;
+                }
+
                 const mi::Point3i& bmin = this->getMin();
                 const mi::Point3i& bmax = this->getMax();
 
-                if ( p.x() == bmin.x() ) return true;
-                if ( p.y() == bmin.y() ) return true;
-                if ( p.z() == bmin.z() ) return true;
+                if ( p.x() == bmin.x() ) {
+                        return true;
+                }
 
-                if ( p.x() == bmax.x() ) return true;
-                if ( p.y() == bmax.y() ) return true;
-                if ( p.z() == bmax.z() ) return true;
+                if ( p.y() == bmin.y() ) {
+                        return true;
+                }
+
+                if ( p.z() == bmin.z() ) {
+                        return true;
+                }
+
+                if ( p.x() == bmax.x() ) {
+                        return true;
+                }
+
+                if ( p.y() == bmax.y() ) {
+                        return true;
+                }
+
+                if ( p.z() == bmax.z() ) {
+                        return true;
+                }
+
                 return false;
         }
 
@@ -294,29 +319,37 @@ namespace mi
         VolumeInfo::clamp_int ( const int input, const int lower, const int upper ) const
         {
                 int result = input;
-                if ( result <  lower ) result = lower;
-                if ( upper < result  ) result = upper;
+
+                if ( result <  lower ) {
+                        result = lower;
+                }
+
+                if ( upper < result  ) {
+                        result = upper;
+                }
+
                 return result;
         }
 
-	void 
-	VolumeInfo::clip ( const Point3d& bmin, const Point3d& bmax, VolumeInfo& info) {
+        void
+        VolumeInfo::clip ( const Point3d& bmin, const Point3d& bmax, VolumeInfo& info )
+        {
                 const Point3d& pitch  = this->getPitch();
-		const Point3i pmin = this->getPointInVoxelFloor( bmin - this->getOrigin());
-		const Point3i pmax = this->getPointInVoxelCeil ( bmax - this->getOrigin());
-		const Point3i size = pmax - pmin + mi::Point3i(1,1,1);
-		
-		info.init ( size, pitch, bmin);
-	}
-/*
-  VolumeInfo
-	VolumeInfo::initByBoundingBox ( const Vector3d& bmin, const Vector3d& bmax,  const Point3d& pitch, const double offset) {
-		mi::Point3d origin = bmin - mi::Vector3d(offset, offset, offset); 
-		mi::Point3i size;
-		size.x() = static_cast<int>( std::ceil ( ( bmax.x() - bmin.x() + 2 * offset ) / pitch.x()) );
-		size.y() = static_cast<int>( std::ceil ( ( bmax.y() - bmin.y() + 2 * offset ) / pitch.y()) );
-		size.z() = static_cast<int>( std::ceil ( ( bmax.z() - bmin.z() + 2 * offset ) / pitch.z()) );
-		return VolumeInfo(size, pitch, origin);
-	}
-*/
+                const Point3i pmin = this->getPointInVoxelFloor ( bmin - this->getOrigin() );
+                const Point3i pmax = this->getPointInVoxelCeil ( bmax - this->getOrigin() );
+                const Point3i size = pmax - pmin + mi::Point3i ( 1, 1, 1 );
+
+                info.init ( size, pitch, bmin );
+        }
+        /*
+          VolumeInfo
+        	VolumeInfo::initByBoundingBox ( const Vector3d& bmin, const Vector3d& bmax,  const Point3d& pitch, const double offset) {
+        		mi::Point3d origin = bmin - mi::Vector3d(offset, offset, offset);
+        		mi::Point3i size;
+        		size.x() = static_cast<int>( std::ceil ( ( bmax.x() - bmin.x() + 2 * offset ) / pitch.x()) );
+        		size.y() = static_cast<int>( std::ceil ( ( bmax.y() - bmin.y() + 2 * offset ) / pitch.y()) );
+        		size.z() = static_cast<int>( std::ceil ( ( bmax.z() - bmin.z() + 2 * offset ) / pitch.z()) );
+        		return VolumeInfo(size, pitch, origin);
+        	}
+        */
 };

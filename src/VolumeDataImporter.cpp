@@ -12,7 +12,7 @@ namespace mi
                 VolumeData<T>& _data; ///< Data.
                 const size_t   _header; ///< Header size ( byte ).
         public:
-                Impl ( VolumeData<T>& data, const size_t header ) : _data( data ), _header( header )
+                Impl ( VolumeData<T>& data, const size_t header ) : _data ( data ), _header ( header )
                 {
                         return;
                 }
@@ -22,12 +22,12 @@ namespace mi
                         return;
                 }
 
-                VolumeData<T>& getData( void )
+                VolumeData<T>& getData ( void )
                 {
                         return this->_data;
                 }
 
-                size_t getHeaderSize( void ) const
+                size_t getHeaderSize ( void ) const
                 {
                         return this->_header;
                 }
@@ -35,7 +35,7 @@ namespace mi
 
         template <typename T>
         VolumeDataImporter<T>::VolumeDataImporter ( VolumeData<T>& data, const size_t header_size )
-                : Importer ( true ), _impl ( new Impl( data,  header_size ) )
+                : Importer ( true ), _impl ( new Impl ( data,  header_size ) )
         {
                 return;
         }
@@ -49,7 +49,7 @@ namespace mi
         bool
         VolumeDataImporter<T>::readHeader ( std::ifstream& fin )
         {
-                fin.seekg( this->_impl->getHeaderSize() ).good();
+                fin.seekg ( this->_impl->getHeaderSize() ).good();
                 return fin.good();
         }
 
@@ -70,16 +70,18 @@ namespace mi
                 const size_t bufSize = sizeof ( T ) * buffer.size();
 
                 for ( int z = 0 ; z < size.z() ; ++z ) {
-                        if( !fin.read ( ( char* ) & ( buffer[0] ), bufSize ) ) {
+                        if ( !fin.read ( ( char* ) & ( buffer[0] ), bufSize ) ) {
                                 std::cerr << "reading data failed." << std::endl;
                                 return false;
                         }
+
                         for ( int y = 0 ; y < size.y() ; ++y ) {
                                 for ( int x = 0 ; x < size.x() ; ++x ) {
                                         data.at ( x, y, z ) = buffer[ x +  y * size.x() ];
                                 }
                         }
                 }
+
                 return true;
         }
 
@@ -94,13 +96,13 @@ namespace mi
                 return std::string ( "raw" );
         }
 #define VOLUME_DATA_IMPORTER(TYPE) template class VolumeDataImporter<TYPE>;
-        VOLUME_DATA_IMPORTER( unsigned char );
-        VOLUME_DATA_IMPORTER( char );
-        VOLUME_DATA_IMPORTER( unsigned short );
-        VOLUME_DATA_IMPORTER( short );
-        VOLUME_DATA_IMPORTER( unsigned int );
-        VOLUME_DATA_IMPORTER( int );
-        VOLUME_DATA_IMPORTER( float );
-        VOLUME_DATA_IMPORTER( double );
+        VOLUME_DATA_IMPORTER ( unsigned char );
+        VOLUME_DATA_IMPORTER ( char );
+        VOLUME_DATA_IMPORTER ( unsigned short );
+        VOLUME_DATA_IMPORTER ( short );
+        VOLUME_DATA_IMPORTER ( unsigned int );
+        VOLUME_DATA_IMPORTER ( int );
+        VOLUME_DATA_IMPORTER ( float );
+        VOLUME_DATA_IMPORTER ( double );
 }
 
