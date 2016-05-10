@@ -38,7 +38,7 @@ namespace mi
 		T at ( const int x, const int y, const int z ) const;
 		T& at ( const int x, const int y, const int z );
                 void clear( void );
-                bool clone( VolumeData<T>& that );
+                bool clone( const VolumeData<T>& that );
                 bool allocate ( void );
                 bool deallocate ( void );
 		bool isReadable ( void ) const;

@@ -2,7 +2,8 @@
  * @file VolumeDataExporter.cpp
  * @author Takashi Michikawa <michikawa@acm.org>
  */
-#include <mi/VolumeDataExporter.hpp>
+#include "../include/mi/VolumeDataExporter.hpp"
+#include <iostream>
 namespace mi
 {
 

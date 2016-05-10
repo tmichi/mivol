@@ -209,9 +209,11 @@ namespace mi
         }
         template <typename T>
         bool
-        VolumeData<T>::clone( VolumeData<T>& that )
+        VolumeData<T>::clone( const VolumeData<T>& that )
         {
-                if ( that.getSize() != this->getSize() ) return false;
+//                if ( that.getSize() != this->getSize() ) return false;
+		const VolumeInfo & info = const_cast<VolumeData<T>&>(that).getInfo();
+		this->init( info, true);
                 const Point3i& size = this->getSize();
                 for( int z = 0 ; z < size.z() ; ++z ) {
                         for( int y = 0 ; y < size.y() ; ++y ) {
