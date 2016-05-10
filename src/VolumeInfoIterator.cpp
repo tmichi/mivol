@@ -7,21 +7,25 @@ namespace mi
                 Impl ( const Impl& that );
                 void operator = ( const Impl& that );
         public:
-                Impl( void )
+                Impl ( void )
                 {
                         return;
                 }
 
-                ~Impl( void )
+                ~Impl ( void )
                 {
                         return;
                 }
 
-                void init( VolumeInfo* info, const bool isBegin )
+                void init ( VolumeInfo* info, const bool isBegin )
                 {
                         this->_info = info;
                         this->_pos = this->_info->getMin();
-                        if( !isBegin ) this->_pos.z() = this->_info->getMax().z() + 1;
+
+                        if ( !isBegin ) {
+                                this->_pos.z() = this->_info->getMax().z() + 1;
+                        }
+
                         return;
                 }
 
@@ -32,17 +36,28 @@ namespace mi
                         return;
                 }
 
-                void stepForward( void )
+                void stepForward ( void )
                 {
                         const Point3i& size = this->_info->getSize();
-                        if( this->_pos.z() >= size.z() ) return;
+
+                        if ( this->_pos.z() >= size.z() ) {
+                                return;
+                        }
 
                         this->_pos.x() += 1;
-                        if( this->_pos.x() < size.x() ) return;
+
+                        if ( this->_pos.x() < size.x() ) {
+                                return;
+                        }
+
                         this->_pos.x() = 0;
 
                         this->_pos.y() += 1;
-                        if( this->_pos.y() < size.y() ) return;
+
+                        if ( this->_pos.y() < size.y() ) {
+                                return;
+                        }
+
                         this->_pos.y() = 0;
 
                         this->_pos.z() += 1;
@@ -55,9 +70,9 @@ namespace mi
                         return this->_pos == that;
                 }
 
-                Point3i& getPosition( void ) const
+                Point3i& getPosition ( void ) const
                 {
-                        return const_cast<Impl*>( this )->_pos;
+                        return const_cast<Impl*> ( this )->_pos;
                 }
         private:
                 VolumeInfo* _info; ///< A pointer to the information of the volume data..
@@ -65,22 +80,22 @@ namespace mi
         };
 
 
-        VolumeInfo::iterator::iterator( VolumeInfo* info, const bool isBegin ) : _impl( new VolumeInfo::iterator::Impl () )
+        VolumeInfo::iterator::iterator ( VolumeInfo* info, const bool isBegin ) : _impl ( new VolumeInfo::iterator::Impl () )
         {
-                this->_impl->init( info, isBegin );
+                this->_impl->init ( info, isBegin );
                 return;
         }
 
-        VolumeInfo::iterator::iterator( const iterator& that ) : _impl( new VolumeInfo::iterator::Impl () )
+        VolumeInfo::iterator::iterator ( const iterator& that ) : _impl ( new VolumeInfo::iterator::Impl () )
         {
-                this->_impl->copy ( *( that._impl ) );
+                this->_impl->copy ( * ( that._impl ) );
                 return;
         }
 
         VolumeInfo::iterator&
         VolumeInfo::iterator::operator = ( const iterator& that )
         {
-                this->_impl->copy ( *( that._impl ) );
+                this->_impl->copy ( * ( that._impl ) );
                 return *this;
         }
 
@@ -104,7 +119,7 @@ namespace mi
          * @return Instance of iterator of next position.
          */
         VolumeInfo::iterator
-        VolumeInfo::iterator::operator++( int )
+        VolumeInfo::iterator::operator++ ( int )
         {
                 iterator tmp ( *this );
                 ++tmp;
@@ -119,9 +134,9 @@ namespace mi
          */
 
         bool
-        VolumeInfo::iterator::operator==( const VolumeInfo::iterator& rhs )
+        VolumeInfo::iterator::operator== ( const VolumeInfo::iterator& rhs )
         {
-                return this->_impl->isSame( *rhs );
+                return this->_impl->isSame ( *rhs );
         }
 
         /**
@@ -131,9 +146,9 @@ namespace mi
          * @retval false Two iterators indicate the same position.
          */
         bool
-        VolumeInfo::iterator::operator!=( const iterator& rhs )
+        VolumeInfo::iterator::operator!= ( const iterator& rhs )
         {
-                return ! this->_impl->isSame( *rhs );
+                return ! this->_impl->isSame ( *rhs );
         }
 
         /**
@@ -144,7 +159,7 @@ namespace mi
         VolumeInfo::iterator
         VolumeInfo::iterator::operator + ( const int n )
         {
-                VolumeInfo::iterator tmp( *this );
+                VolumeInfo::iterator tmp ( *this );
                 tmp.operator += ( n );
                 return tmp;
         }
@@ -158,7 +173,11 @@ namespace mi
         VolumeInfo::iterator::operator += ( const int n )
         {
                 VolumeInfo::iterator& iter = *this;
-                for( int i = 0 ; i < n ; ++i ) ++iter;
+
+                for ( int i = 0 ; i < n ; ++i ) {
+                        ++iter;
+                }
+
                 return *this;
         }
 
@@ -167,7 +186,7 @@ namespace mi
          * @return Position where the iterator indicates.
          */
         Point3i&
-        VolumeInfo::iterator::operator*( void ) const
+        VolumeInfo::iterator::operator* ( void ) const
         {
 
                 return this->_impl->getPosition();

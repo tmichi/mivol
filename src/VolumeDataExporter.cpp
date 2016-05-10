@@ -13,7 +13,7 @@ namespace mi
         private:
                 VolumeData<T>& _data; ///< Volume data.
         public:
-                Impl ( VolumeData<T>& data ) : _data( data )
+                Impl ( VolumeData<T>& data ) : _data ( data )
                 {
                         return;
                 }
@@ -53,17 +53,20 @@ namespace mi
                 const size_t bufSize = sizeof ( T ) * numElem;
 
                 std::vector<T> buf ( numElem, T() );
+
                 for ( int z = 0 ; z < size.z() ; ++z ) {
                         for ( int y = 0 ; y < size.y() ; ++y ) {
                                 for ( int x = 0 ; x < size.x() ; ++x )  {
                                         buf.at ( x + size.x() * y ) = data.at ( x, y, z );
                                 }
                         }
-                        if( !fout.write ( ( char* )( &buf[0] ), bufSize ) ) {
+
+                        if ( !fout.write ( ( char* ) ( &buf[0] ), bufSize ) ) {
                                 std::cerr << "writing data failed. " << std::endl;
                                 return false;
                         }
                 }
+
                 return fout.good();
         }
 
@@ -75,14 +78,14 @@ namespace mi
         }
 
 #define VOLUME_DATA_EXPORTER(TYPE) template class VolumeDataExporter<TYPE>
-        VOLUME_DATA_EXPORTER( unsigned char );
-        VOLUME_DATA_EXPORTER( char );
-        VOLUME_DATA_EXPORTER( unsigned short );
-        VOLUME_DATA_EXPORTER( short );
-        VOLUME_DATA_EXPORTER( unsigned int );
-        VOLUME_DATA_EXPORTER( int );
-        VOLUME_DATA_EXPORTER( float );
-        VOLUME_DATA_EXPORTER( double );
+        VOLUME_DATA_EXPORTER ( unsigned char );
+        VOLUME_DATA_EXPORTER ( char );
+        VOLUME_DATA_EXPORTER ( unsigned short );
+        VOLUME_DATA_EXPORTER ( short );
+        VOLUME_DATA_EXPORTER ( unsigned int );
+        VOLUME_DATA_EXPORTER ( int );
+        VOLUME_DATA_EXPORTER ( float );
+        VOLUME_DATA_EXPORTER ( double );
 }
 
 

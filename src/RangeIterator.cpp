@@ -19,29 +19,37 @@ namespace mi
                         this->_range = that._range;
                         this->_pos   = that._pos;
                 }
-                void init( const Range* range, const bool isBegining = true )
+                void init ( const Range* range, const bool isBegining = true )
                 {
                         this->_pos = range->getMin();
-                        if ( !isBegining ) this->_pos.z() = range->getMax().z() + 1;
+
+                        if ( !isBegining ) {
+                                this->_pos.z() = range->getMax().z() + 1;
+                        }
+
                         return;
                 }
 
-                void stepForward( void )
+                void stepForward ( void )
                 {
                         const Point3i& bmin = this->_range->getMin();
                         const Point3i& bmax = this->_range->getMax();
                         Point3i& pos = this->_pos;
-                        if( pos.z() <= bmax.z() ) {
+
+                        if ( pos.z() <= bmax.z() ) {
                                 pos.x() += 1;
-                                if( bmax.x() < pos.x() ) {
+
+                                if ( bmax.x() < pos.x() ) {
                                         pos.x() = bmin.x();
                                         pos.y() += 1;
-                                        if( bmax.y() < pos.y() ) {
+
+                                        if ( bmax.y() < pos.y() ) {
                                                 pos.y() = bmin.y();
                                                 pos.z() += 1;
                                         }
                                 }
                         }
+
                         return;
                 }
 
@@ -61,14 +69,14 @@ namespace mi
 
         Range::iterator::iterator ( const iterator& that ) :  _impl ( new Impl () )
         {
-                this->_impl->copy( *( that._impl ) );
+                this->_impl->copy ( * ( that._impl ) );
                 return;
         }
 
         Range::iterator&
         Range::iterator::operator = ( const iterator& that )
         {
-                this->_impl->copy ( *( that._impl ) );
+                this->_impl->copy ( * ( that._impl ) );
                 return *this;
         }
 
@@ -81,7 +89,7 @@ namespace mi
         Range::iterator&
         Range::iterator::init ( Range* range, const bool isBeginning )
         {
-                this->_impl->init( range, isBeginning );
+                this->_impl->init ( range, isBeginning );
                 return *this;
         }
 
@@ -93,7 +101,7 @@ namespace mi
         }
 
         Range::iterator
-        Range::iterator::operator++( int )
+        Range::iterator::operator++ ( int )
         {
                 Range::iterator tmp ( *this );
                 ++tmp;
@@ -101,7 +109,7 @@ namespace mi
         }
 
         bool
-        Range::iterator::operator==( const iterator& that )
+        Range::iterator::operator== ( const iterator& that )
         {
                 return this->_impl->getPosition() == that._impl->getPosition();
         }
@@ -115,7 +123,7 @@ namespace mi
         Range::iterator
         Range::iterator::operator + ( const int n )
         {
-                Range::iterator tmp( *this );
+                Range::iterator tmp ( *this );
                 tmp.operator += ( n );
                 return tmp;
         }
@@ -124,7 +132,11 @@ namespace mi
         Range::iterator::operator += ( const int n )
         {
                 iterator& iter = *this;
-                for( int i = 0 ; i < n ; ++i ) ++iter;
+
+                for ( int i = 0 ; i < n ; ++i ) {
+                        ++iter;
+                }
+
                 return *this;
         }
 

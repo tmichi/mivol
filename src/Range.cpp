@@ -4,7 +4,7 @@ namespace mi
         class Range::Impl
         {
         public:
-                Impl ( void ) : _bmin ( Point3i( 0, 0, 0 ) ), _bmax( Point3i( 0, 0, 0 ) )
+                Impl ( void ) : _bmin ( Point3i ( 0, 0, 0 ) ), _bmax ( Point3i ( 0, 0, 0 ) )
                 {
                         return;
                 }
@@ -14,22 +14,26 @@ namespace mi
                         return;
                 }
 
-                void init( const Point3i& bmin, const Point3i& bmax )
+                void init ( const Point3i& bmin, const Point3i& bmax )
                 {
                         this->_bmin = bmin;
                         this->_bmax = bmax;
-                        if( bmin.x() > bmax.x() ) {
+
+                        if ( bmin.x() > bmax.x() ) {
                                 this->_bmin.x() = bmax.x();
                                 this->_bmax.x() = bmin.x();
                         }
-                        if( bmin.y() > bmax.y() ) {
+
+                        if ( bmin.y() > bmax.y() ) {
                                 this->_bmin.y() = bmax.y();
                                 this->_bmax.y() = bmin.y();
                         }
-                        if( bmin.z() > bmax.z() ) {
+
+                        if ( bmin.z() > bmax.z() ) {
                                 this->_bmin.z() = bmax.z();
                                 this->_bmax.z() = bmin.z();
                         }
+
                         return;
                 }
 
@@ -48,15 +52,15 @@ namespace mi
                 Point3i _bmax;
         };
 
-        Range::Range( const Point3i& bmin, const Point3i& bmax ) : _impl ( new Impl () )
+        Range::Range ( const Point3i& bmin, const Point3i& bmax ) : _impl ( new Impl () )
         {
-                this->_impl->init( bmin, bmax );
+                this->_impl->init ( bmin, bmax );
                 return;
         }
 
-        Range::Range( const Range& that ) : _impl ( new Impl () )
+        Range::Range ( const Range& that ) : _impl ( new Impl () )
         {
-                this->_impl->init( that.getMin(), that.getMax() ) ;
+                this->_impl->init ( that.getMin(), that.getMax() ) ;
                 return;
         }
 
@@ -69,7 +73,7 @@ namespace mi
         Range&
         Range::operator = ( const Range& that )
         {
-                this->_impl->init( that.getMin(), that.getMax() ) ;
+                this->_impl->init ( that.getMin(), that.getMax() ) ;
                 return *this;
         }
 
@@ -84,30 +88,30 @@ namespace mi
         }
 
         Point3i
-        Range::getMin( void ) const
+        Range::getMin ( void ) const
         {
                 return this->_impl->getMin();
         }
 
         Point3i
-        Range::getMax( void ) const
+        Range::getMax ( void ) const
         {
                 return this->_impl->getMax();
         }
 
         Range::iterator
-        Range::begin( void )
+        Range::begin ( void )
         {
                 Range::iterator iter;
-                iter.init( this, true );
+                iter.init ( this, true );
                 return iter;
         }
 
         Range::iterator
-        Range::end( void )
+        Range::end ( void )
         {
                 Range::iterator iter;
-                iter.init( this, false );
+                iter.init ( this, false );
                 return iter;
         }
 }

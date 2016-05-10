@@ -17,26 +17,33 @@ namespace mi
 
 
         std::vector< Point3i >&
-        Neighbor::getNeighbor( void )
+        Neighbor::getNeighbor ( void )
         {
                 static std::vector< Point3i > dp;
-                if( dp.size() == 0 ) {
-                        dp.reserve( 26 );
-                        for( int dz = -1 ; dz <= 1 ; ++dz ) {
-                                for( int dy = -1 ; dy <= 1 ; ++dy ) {
-                                        for( int dx = -1 ; dx <= 1 ; ++dx ) {
-                                                if( dx == 0 && dy == 0 && dz == 0 ) continue;
-                                                dp.push_back( Point3i( dx, dy, dz ) );
+
+                if ( dp.size() == 0 ) {
+                        dp.reserve ( 26 );
+
+                        for ( int dz = -1 ; dz <= 1 ; ++dz ) {
+                                for ( int dy = -1 ; dy <= 1 ; ++dy ) {
+                                        for ( int dx = -1 ; dx <= 1 ; ++dx ) {
+                                                if ( dx == 0 && dy == 0 && dz == 0 ) {
+                                                        continue;
+                                                }
+
+                                                dp.push_back ( Point3i ( dx, dy, dz ) );
                                         }
                                 }
                         }
-                        std::sort( dp.begin(), dp.end(), l1dist() );
+
+                        std::stable_sort ( dp.begin(), dp.end(), l1dist() );
                 }
+
                 return dp;
         }
 
         Neighbor::iterator
-        Neighbor::begin( void )
+        Neighbor::begin ( void )
         {
                 return Neighbor::getNeighbor().begin();
         }
@@ -51,18 +58,19 @@ namespace mi
         Neighbor::iterator
         Neighbor::end6 ( void )
         {
-                return Neighbor::end( 6 );
+                return Neighbor::end ( 6 );
         }
 
         Neighbor::iterator
         Neighbor::end18 ( void )
         {
-                return Neighbor::end( 18 );
+                return Neighbor::end ( 18 );
         }
 
         Neighbor::iterator
         Neighbor::end26 ( void )
         {
-                return Neighbor::end( 26 );
+                return Neighbor::end ( 26 );
         }
+
 }
