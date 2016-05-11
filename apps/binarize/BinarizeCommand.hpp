@@ -3,7 +3,7 @@
 
 #include <string>
 #include <mi/CommandTemplate.hpp>
-#include <mi/math.hpp>
+#include <mi/volmath.hpp>
 template<typename T>
 class BinarizeCommand : public mi::CommandTemplate
 {
