@@ -6,7 +6,7 @@
 #ifndef MI_RANGE_HPP
 #define MI_RANGE_HPP 1
 #include <iterator>
-
+#include <memory>
 #include "volmath.hpp"
 namespace mi
 {
@@ -45,7 +45,7 @@ namespace mi
 		Range::iterator end( void );
         private:
 		class Impl;
-		Impl* _impl;
+		std::unique_ptr<Impl> _impl;
         };
 }
 #endif //MI_RANGE_HPP

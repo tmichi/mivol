@@ -1,10 +1,11 @@
 #include <mi/Range.hpp>
+#include <iostream>
 namespace mi
 {
         class Range::iterator::Impl
         {
         public:
-                Impl ( void )
+                Impl ( void ) 
                 {
                         return;
                 }
@@ -15,12 +16,14 @@ namespace mi
                 }
 
                 void copy ( const Impl& that )
-                {
+		{
                         this->_range = that._range;
                         this->_pos   = that._pos;
                 }
-                void init ( const Range* range, const bool isBegining = true )
-                {
+
+                void init ( Range* range, const bool isBegining = true )
+		{
+			this->_range = range;
                         this->_pos = range->getMin();
 
                         if ( !isBegining ) {
@@ -34,23 +37,27 @@ namespace mi
                 {
                         const Point3i& bmin = this->_range->getMin();
                         const Point3i& bmax = this->_range->getMax();
+
                         Point3i& pos = this->_pos;
-
-                        if ( pos.z() <= bmax.z() ) {
-                                pos.x() += 1;
-
-                                if ( bmax.x() < pos.x() ) {
-                                        pos.x() = bmin.x();
-                                        pos.y() += 1;
-
-                                        if ( bmax.y() < pos.y() ) {
-                                                pos.y() = bmin.y();
-                                                pos.z() += 1;
-                                        }
-                                }
-                        }
-
-                        return;
+			if ( bmax.z() < pos.z() ) {
+				pos.x() = bmin.x();
+				pos.y() = bmin.y();
+				pos.z() = bmax.z() + 1;
+				return;
+			}
+			else {
+				pos.x() += 1;
+				if ( bmax.x() < pos.x() ) {
+					pos.x() = bmin.x();
+					pos.y() += 1;
+					
+					if ( bmax.y() < pos.y() ) {
+						pos.y() = bmin.y();
+						pos.z() += 1;
+					}
+				}
+				return;
+			}
                 }
 
                 Point3i& getPosition ( void )

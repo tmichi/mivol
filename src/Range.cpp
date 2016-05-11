@@ -66,7 +66,6 @@ namespace mi
 
         Range::~Range ( void )
         {
-                delete this->_impl;
                 return;
         }
 
