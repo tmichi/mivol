@@ -6,7 +6,7 @@
 #define MI_VOLUME_DATA_EXPORTER_HPP 1
 #include <mi/Exporter.hpp>
 #include <mi/VolumeData.hpp>
-
+#include <memory>
 namespace mi
 {
         /**
@@ -24,7 +24,7 @@ namespace mi
                 std::string toString ( void ) const;
         private:
 		class Impl;
-		Impl* _impl;
+		std::unique_ptr<Impl> _impl;
         };
 }
 #endif// MI_VOLUME_DATA_EXPORTER_HPP

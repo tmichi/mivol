@@ -1,11 +1,8 @@
 #include <mi/VolumeInfo.hpp>
 namespace mi
 {
-        class VolumeInfo::iterator::Impl
+        class VolumeInfo::iterator::Impl : public NonCopyable
         {
-        private:
-                Impl ( const Impl& that );
-                void operator = ( const Impl& that );
         public:
                 Impl ( void )
                 {
@@ -21,11 +18,11 @@ namespace mi
                 {
                         this->_info = info;
                         this->_pos = this->_info->getMin();
-
+			
                         if ( !isBegin ) {
                                 this->_pos.z() = this->_info->getMax().z() + 1;
                         }
-
+			
                         return;
                 }
 
@@ -80,13 +77,15 @@ namespace mi
         };
 
 
-        VolumeInfo::iterator::iterator ( VolumeInfo* info, const bool isBegin ) : _impl ( new VolumeInfo::iterator::Impl () )
+        VolumeInfo::iterator::iterator ( VolumeInfo* info, const bool isBegin ) : 
+		NonCopyable(), _impl ( new VolumeInfo::iterator::Impl () )
         {
                 this->_impl->init ( info, isBegin );
                 return;
         }
 
-        VolumeInfo::iterator::iterator ( const iterator& that ) : _impl ( new VolumeInfo::iterator::Impl () )
+        VolumeInfo::iterator::iterator ( const iterator& that ) : 
+		NonCopyable(), _impl ( new VolumeInfo::iterator::Impl () )
         {
                 this->_impl->copy ( * ( that._impl ) );
                 return;
@@ -101,7 +100,6 @@ namespace mi
 
         VolumeInfo::iterator::~iterator ( void )
         {
-                delete _impl;
                 return;
         }
 
@@ -173,7 +171,6 @@ namespace mi
         VolumeInfo::iterator::operator += ( const int n )
         {
                 VolumeInfo::iterator& iter = *this;
-
                 for ( int i = 0 ; i < n ; ++i ) {
                         ++iter;
                 }
@@ -188,7 +185,6 @@ namespace mi
         Point3i&
         VolumeInfo::iterator::operator* ( void ) const
         {
-
                 return this->_impl->getPosition();
         }
 }

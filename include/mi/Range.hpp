@@ -5,9 +5,11 @@
  */
 #ifndef MI_RANGE_HPP
 #define MI_RANGE_HPP 1
+
 #include <iterator>
 #include <memory>
 #include "volmath.hpp"
+
 namespace mi
 {
         class Range
@@ -30,7 +32,7 @@ namespace mi
                         Point3i&  operator *  ( void );
                 private:
 			class Impl;
-			Impl *_impl;
+			std::unique_ptr<Impl> _impl;
                 };//iterator
         public:
                 explicit Range ( const Point3i& bmin, const Point3i& bmax );

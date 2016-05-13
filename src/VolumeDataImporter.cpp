@@ -22,12 +22,12 @@ namespace mi
                         return;
                 }
 
-                VolumeData<T>& getData ( void )
+                VolumeData<T>& data ( void )
                 {
                         return this->_data;
                 }
 
-                size_t getHeaderSize ( void ) const
+                size_t header_size ( void ) const
                 {
                         return this->_header;
                 }
@@ -39,17 +39,18 @@ namespace mi
         {
                 return;
         }
+
         template <typename T>
         VolumeDataImporter<T>::~VolumeDataImporter ( void )
         {
-                delete this->_impl;
+		return;
         }
 
         template <typename T>
         bool
         VolumeDataImporter<T>::readHeader ( std::ifstream& fin )
         {
-                fin.seekg ( this->_impl->getHeaderSize() ).good();
+                fin.seekg ( this->_impl->header_size() ).good();
                 return fin.good();
         }
 
@@ -58,7 +59,7 @@ namespace mi
         bool
         VolumeDataImporter<T>::readBody ( std::ifstream& fin )
         {
-                VolumeData<T>& data = this->_impl->getData();
+                VolumeData<T>& data = this->_impl->data();
 
                 if ( !data.isReadable() ) {
                         std::cerr << "error : volume data cannot be read. memory space is not allocated yet." << std::endl;

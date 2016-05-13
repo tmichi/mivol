@@ -96,7 +96,6 @@ namespace mi
         template <typename T>
         VolumeData<T>::~VolumeData ( void )
         {
-                delete this->_impl;
                 return;
         }
 

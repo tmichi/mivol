@@ -89,7 +89,6 @@ namespace mi
 
         Range::iterator::~iterator ( void )
         {
-                delete this->_impl;
                 return;
         }
 
