@@ -5,17 +5,21 @@
 #ifndef MI_VOLUME_DATA_HPP
 #define MI_VOLUME_DATA_HPP 1
 #include "VolumeInfo.hpp"
+#include <mi/NonCopyable.hpp>
 namespace mi
 {
         /**
          * @class VolumeData VolumeData.hpp <mi/VolumeData.hpp>
          */
         template <typename T>
-        class VolumeData
+        class VolumeData : public NonCopyable
         {
+<<<<<<< HEAD
         private:
                 VolumeData( const VolumeData<T>& that );
                 void operator = ( const VolumeData<T>& that );
+=======
+>>>>>>> 5231d8d21084790bb03dfd3b37df5ff2c2d9c5d9
         public:
                 explicit VolumeData ( void );
                 explicit VolumeData ( const int x, const int y, const int z , const bool allocateMemory = true );
@@ -41,13 +45,10 @@ namespace mi
                 bool deallocate ( void );
 		bool isReadable ( void ) const;
                 bool check ( void );
-//                iterator begin( void );
-//                iterator end( void );
-
                 std::string createFileName( const std::string& name, const std::string& ext = std::string( "raw" ) );
         private:
 		class Impl;
-		Impl* _impl;
+		std::unique_ptr<Impl> _impl;
         };
 };
 #endif// MI_VOLUME_DATA_HPP

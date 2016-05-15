@@ -18,7 +18,7 @@ namespace mi
                         return;
                 }
 
-                VolumeData<T>& getData()
+                VolumeData<T>& data()
                 {
                         return this->_data;
                 }
@@ -33,7 +33,6 @@ namespace mi
         template <typename T>
         VolumeDataExporter<T>::~VolumeDataExporter ( void )
         {
-                delete this->_impl;
                 return;
         }
 
@@ -41,7 +40,7 @@ namespace mi
         bool
         VolumeDataExporter<T>::writeBody ( std::ofstream& fout )
         {
-                VolumeData<T>& data = this->_impl->getData();
+                VolumeData<T>& data = this->_impl->data();
 
                 if ( ! data.isReadable() ) {
                         std::cerr << "volume data is not readable." << std::endl;

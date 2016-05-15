@@ -8,15 +8,12 @@
 
 namespace mi
 {
-        class VolumeInfo::Impl
+        class VolumeInfo::Impl : public NonCopyable
         {
         private:
                 Point3i _size;   ///< Global bounding box.
                 Point3d _pitch;  ///< Voxel pitch.
                 Point3d _origin; ///< Origin point. Corresponding to global (0,0,0) in voxel space.
-        private:
-                Impl ( const Impl& );
-                void operator = ( const Impl& );
         public:
                 Impl ( void ) : _size ( 0, 0, 0 ), _pitch ( 1, 1, 1 ), _origin ( 0, 0, 0 )
                 {
@@ -78,11 +75,6 @@ namespace mi
 
         VolumeInfo::~VolumeInfo ( void )
         {
-                if ( this->_impl != NULL ) {
-                        delete this->_impl;
-                        this->_impl = NULL;
-                }
-
                 return;
         }
 

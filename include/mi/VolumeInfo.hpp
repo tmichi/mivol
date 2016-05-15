@@ -10,12 +10,16 @@
 #include <iterator>
 #include <vector>
 #include <memory>
+<<<<<<< HEAD
+=======
+#include <mi/NonCopyable.hpp>
+>>>>>>> 5231d8d21084790bb03dfd3b37df5ff2c2d9c5d9
 #include "volmath.hpp"
 
 
 namespace mi
 {
-        class VolumeInfo
+        class VolumeInfo : public NonCopyable
         {
         private:
                 void operator = ( const VolumeInfo& that );
@@ -36,11 +40,11 @@ namespace mi
                         Point3i&  operator *  ( void ) const;
                 private:
 			class Impl;
-			Impl *_impl;
+			std::unique_ptr<Impl> _impl;
                 };
         private:
 		class Impl;
-		Impl *_impl;
+		std::unique_ptr<Impl> _impl;
         public:
                 explicit VolumeInfo ( const Point3i& size   = Point3i( 0,0,0 ), 
 				      const Point3d& pitch  = Point3d( 1,1,1 ), 

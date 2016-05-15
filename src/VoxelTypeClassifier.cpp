@@ -15,11 +15,8 @@
 #include <mi/VolumeInfo.hpp>
 namespace mi
 {
-        class ComponentCounter
+        class ComponentCounter : public NonCopyable
         {
-        private:
-                ComponentCounter ( const ComponentCounter& that ) ;
-                void operator =  ( const ComponentCounter& that ) ;
         public:
                 ComponentCounter ( const std::vector<bool>& voxel ) : _voxel ( voxel )
                 {

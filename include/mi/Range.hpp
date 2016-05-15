@@ -5,9 +5,11 @@
  */
 #ifndef MI_RANGE_HPP
 #define MI_RANGE_HPP 1
+
 #include <iterator>
 #include <memory>
 #include "volmath.hpp"
+
 namespace mi
 {
         class Range
