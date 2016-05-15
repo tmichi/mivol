@@ -14,12 +14,6 @@ namespace mi
         template <typename T>
         class VolumeData : public NonCopyable
         {
-<<<<<<< HEAD
-        private:
-                VolumeData( const VolumeData<T>& that );
-                void operator = ( const VolumeData<T>& that );
-=======
->>>>>>> 5231d8d21084790bb03dfd3b37df5ff2c2d9c5d9
         public:
                 explicit VolumeData ( void );
                 explicit VolumeData ( const int x, const int y, const int z , const bool allocateMemory = true );

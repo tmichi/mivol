@@ -10,10 +10,7 @@
 #include <iterator>
 #include <vector>
 #include <memory>
-<<<<<<< HEAD
-=======
 #include <mi/NonCopyable.hpp>
->>>>>>> 5231d8d21084790bb03dfd3b37df5ff2c2d9c5d9
 #include "volmath.hpp"
 
 
@@ -24,7 +21,7 @@ namespace mi
         private:
                 void operator = ( const VolumeInfo& that );
         public:
-                class iterator :  public std::iterator<std::input_iterator_tag, Point3i>
+                class iterator :  public std::iterator<std::input_iterator_tag, Point3i>, public NonCopyable
                 {
                 public:
                         explicit iterator( VolumeInfo* info, const bool isBegin = true );
