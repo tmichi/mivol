@@ -30,7 +30,7 @@ namespace mi
                         Point3i&  operator *  ( void );
                 private:
 			class Impl;
-			Impl *_impl;
+			std::unique_ptr<Impl> _impl;
                 };//iterator
         public:
                 explicit Range ( const Point3i& bmin, const Point3i& bmax );

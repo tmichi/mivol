@@ -13,8 +13,6 @@ namespace mi
         template <typename T>
         class VolumeData
         {
-
-
         private:
                 VolumeData( const VolumeData<T>& that );
                 void operator = ( const VolumeData<T>& that );

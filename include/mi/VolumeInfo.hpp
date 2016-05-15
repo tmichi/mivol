@@ -9,7 +9,7 @@
 #include <cstring>
 #include <iterator>
 #include <vector>
-
+#include <memory>
 #include "volmath.hpp"
 
 

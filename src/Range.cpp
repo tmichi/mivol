@@ -37,13 +37,12 @@ namespace mi
                         return;
                 }
 
-
-                Point3i& getMin ( void )
+                Point3i min ( void ) const
                 {
                         return this->_bmin;
                 }
 
-                Point3i& getMax ( void )
+                Point3i max ( void ) const
                 {
                         return this->_bmax;
                 }
@@ -89,13 +88,13 @@ namespace mi
         Point3i
         Range::getMin ( void ) const
         {
-                return this->_impl->getMin();
+                return this->_impl->min();
         }
 
         Point3i
         Range::getMax ( void ) const
         {
-                return this->_impl->getMax();
+                return this->_impl->max();
         }
 
         Range::iterator
